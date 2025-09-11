@@ -14,6 +14,13 @@ class NovaSenhaPage extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
+          image: DecorationImage(
+            image: AssetImage("assets/paws_pattern.png"),
+            repeat: ImageRepeat.repeat,
+            fit: BoxFit.none,
+            scale: 1,
+            opacity: 0.08,
+          ),
         ),
         child: Center(
           child: SingleChildScrollView(
@@ -34,10 +41,16 @@ class NovaSenhaPage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Colors.teal,
+                    child: Icon(Icons.lock, size: 45, color: Colors.white),
+                  ),
+                  SizedBox(height: 16),
                   Text(
-                    "Defina uma nova senha",
+                    "Definir nova senha",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.teal.shade800,
                     ),
@@ -47,7 +60,7 @@ class NovaSenhaPage extends StatelessWidget {
                     controller: _newPassController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock, color: Colors.teal),
+                      prefixIcon: Icon(Icons.lock_outline, color: Colors.teal),
                       labelText: "Nova senha",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -59,7 +72,7 @@ class NovaSenhaPage extends StatelessWidget {
                     controller: _confirmPassController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock_outline, color: Colors.teal),
+                      prefixIcon: Icon(Icons.lock_reset, color: Colors.teal),
                       labelText: "Confirmar senha",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -69,8 +82,17 @@ class NovaSenhaPage extends StatelessWidget {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      // Aqui faria a lógica para salvar a nova senha
-                      Navigator.popUntil(context, (route) => route.isFirst);
+                      if (_newPassController.text == _confirmPassController.text &&
+                          _newPassController.text.isNotEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Senha alterada com sucesso!")),
+                        );
+                        Navigator.popUntil(context, (route) => route.isFirst);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("As senhas não coincidem!")),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,
@@ -79,8 +101,9 @@ class NovaSenhaPage extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
+                      elevation: 5,
                     ),
-                    child: Text("Salvar nova senha"),
+                    child: Text("Salvar nova senha", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),

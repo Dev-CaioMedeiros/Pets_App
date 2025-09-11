@@ -19,6 +19,13 @@ class ConfirmarPage extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
+          image: DecorationImage(
+            image: AssetImage("assets/paws_pattern.png"),
+            repeat: ImageRepeat.repeat,
+            fit: BoxFit.none,
+            scale: 1,
+            opacity: 0.08,
+          ),
         ),
         child: Center(
           child: SingleChildScrollView(
@@ -39,19 +46,32 @@ class ConfirmarPage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Colors.teal,
+                    child: Icon(Icons.verified_user, size: 45, color: Colors.white),
+                  ),
+                  SizedBox(height: 16),
                   Text(
-                    "Confirme o código enviado para\n$valor",
-                    textAlign: TextAlign.center,
+                    "Confirmar código",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
                       color: Colors.teal.shade800,
                     ),
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    "Enviamos um código para seu ${metodo == "email" ? "e-mail" : "telefone"}:\n$valor",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey[700], fontSize: 16),
                   ),
                   SizedBox(height: 20),
                   TextField(
                     controller: _codeController,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.verified, color: Colors.teal),
+                      prefixIcon: Icon(Icons.password, color: Colors.teal),
                       labelText: "Digite o código",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -75,8 +95,9 @@ class ConfirmarPage extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
+                      elevation: 5,
                     ),
-                    child: Text("Confirmar"),
+                    child: Text("Confirmar", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),

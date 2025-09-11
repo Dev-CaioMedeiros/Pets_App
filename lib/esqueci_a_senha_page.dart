@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'confirmar_page.dart';
+import 'utils/masks.dart';
 
 class EsqueciSenhaPage extends StatefulWidget {
   @override
@@ -19,6 +21,13 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
             colors: [Colors.blueGrey.shade900, Colors.blueGrey.shade700],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+          ),
+          image: DecorationImage(
+            image: AssetImage("assets/paws_pattern.png"),
+            repeat: ImageRepeat.repeat,
+            fit: BoxFit.none,
+            scale: 1,
+            opacity: 0.08,
           ),
         ),
         child: Center(
@@ -40,7 +49,11 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.lock_reset, size: 60, color: Colors.teal),
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Colors.teal,
+                    child: Icon(Icons.lock_reset, size: 45, color: Colors.white),
+                  ),
                   SizedBox(height: 16),
                   Text(
                     "Esqueci minha senha",
@@ -50,7 +63,7 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                       color: Colors.teal.shade800,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 25),
 
                   // Escolha do método
                   DropdownButtonFormField<String>(
@@ -67,6 +80,8 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                     ],
                     decoration: InputDecoration(
                       labelText: "Escolha uma opção",
+                      filled: true,
+                      fillColor: Colors.grey.shade100,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -83,6 +98,12 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                   if (_selectedOption != null) ...[
                     TextField(
                       controller: _controller,
+                      keyboardType: _selectedOption == "email"
+                          ? TextInputType.emailAddress
+                          : TextInputType.phone,
+                      inputFormatters: _selectedOption == "sms"
+                          ? [telefoneMask] // 👈 aqui aplica a máscara que vc já tem
+                          : [],
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           _selectedOption == "email" ? Icons.email : Icons.phone,
@@ -91,6 +112,8 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                         labelText: _selectedOption == "email"
                             ? "Digite seu E-mail"
                             : "Digite seu Telefone",
+                        filled: true,
+                        fillColor: Colors.grey.shade100,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -112,12 +135,16 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.teal,
                         foregroundColor: Colors.white,
+                        elevation: 5,
                         minimumSize: Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: Text("Enviar código"),
+                      child: Text(
+                        "Enviar código",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
                     ),
                   ],
                 ],
