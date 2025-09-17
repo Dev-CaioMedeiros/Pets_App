@@ -206,6 +206,9 @@ class CadastroPage extends StatelessWidget {
     TextInputType? keyboardType,
   }) {
     return TextField(
+      style: GoogleFonts.quicksand(
+      color: Colors.white,
+        ),
       controller: controller,
       obscureText: obscure,
       inputFormatters: inputFormatters,
@@ -218,7 +221,7 @@ class CadastroPage extends StatelessWidget {
           fontWeight: FontWeight.w600,
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.teal, width: 2),
+          borderSide: BorderSide(color: Colors.white, width: 2),
           borderRadius: BorderRadius.circular(12),
         ),
         enabledBorder: OutlineInputBorder(

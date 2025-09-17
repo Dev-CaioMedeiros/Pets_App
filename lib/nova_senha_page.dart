@@ -62,31 +62,49 @@ class NovaSenhaPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20),
+                      // Campo Nova Senha
                       TextField(
                         controller: _newPassController,
                         obscureText: true,
+                        style: GoogleFonts.quicksand(
+                          color: Colors.white, // texto digitado branco
+                        ),
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock_outline, color: const Color.fromARGB(255, 90, 70, 40)),
+                          prefixIcon: Icon(Icons.lock_outline,
+                              color: const Color.fromARGB(255, 90, 70, 40)), // ícone marrom
                           labelText: "Nova senha",
-                          labelStyle: GoogleFonts.quicksand(
-                            color: const Color.fromARGB(255, 90, 70, 40),
+                          labelStyle: GoogleFonts.quicksand(color: Colors.white), // label branco
+                          hintStyle: GoogleFonts.quicksand(color: Colors.white70), // placeholder branco suave
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white70),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          border: OutlineInputBorder(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                       ),
                       SizedBox(height: 20),
+                      // Campo Confirmar Senha
                       TextField(
                         controller: _confirmPassController,
                         obscureText: true,
+                        style: GoogleFonts.quicksand(
+                          color: Colors.white, // texto digitado branco
+                        ),
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock_reset, color: const Color.fromARGB(255, 90, 70, 40)),
+                          prefixIcon: Icon(Icons.lock_reset,
+                              color: const Color.fromARGB(255, 90, 70, 40)), // ícone marrom
                           labelText: "Confirmar senha",
-                          labelStyle: GoogleFonts.quicksand(
-                            color: const Color.fromARGB(255, 90, 70, 40),
+                          labelStyle: GoogleFonts.quicksand(color: Colors.white), // label branco
+                          hintStyle: GoogleFonts.quicksand(color: Colors.white70),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white70),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          border: OutlineInputBorder(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),

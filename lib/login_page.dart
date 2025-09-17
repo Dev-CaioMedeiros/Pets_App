@@ -1,9 +1,10 @@
-import 'dart:ui'; // necessário para o ImageFilter
+import 'dart:ui'; 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'cadastro_page.dart';
 import 'esqueci_a_senha_page.dart';
+import 'home_page.dart'; // <- importa a HomePage
 
 class LoginPage extends StatelessWidget {
   final _emailController = TextEditingController();
@@ -37,7 +38,7 @@ class LoginPage extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12), // efeito fosco
+                filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 13),
                   padding: EdgeInsets.all(28),
@@ -85,26 +86,27 @@ class LoginPage extends StatelessWidget {
                       TextField(
                         controller: _emailController,
                         style: GoogleFonts.quicksand(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black87,
+                          color: Colors.white,
                         ),
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.email,
-                            color: const Color.fromARGB(255, 90, 70, 40),
+                            color: Color.fromARGB(255, 90, 70, 40),
                           ),
                           labelText: "E-mail",
                           labelStyle: GoogleFonts.quicksand(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: Colors.white,
                             fontWeight: FontWeight.w600,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.teal, width: 2),
-                            borderRadius: BorderRadius.circular(12),
+                          hintStyle: GoogleFonts.quicksand(
+                            color: Colors.white70,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white, width: 2),
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
@@ -116,9 +118,7 @@ class LoginPage extends StatelessWidget {
                         controller: _passwordController,
                         obscureText: true,
                         style: GoogleFonts.quicksand(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black87,
+                          color: Colors.white,
                         ),
                         decoration: InputDecoration(
                           prefixIcon: Icon(
@@ -127,15 +127,15 @@ class LoginPage extends StatelessWidget {
                           ),
                           labelText: "Senha",
                           labelStyle: GoogleFonts.quicksand(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: Colors.white,
                             fontWeight: FontWeight.w600,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.teal, width: 2),
-                            borderRadius: BorderRadius.circular(12),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white, width: 2),
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
@@ -145,7 +145,13 @@ class LoginPage extends StatelessWidget {
                       // Botão Login
                       ElevatedButton(
                         onPressed: () {
-                          // lógica de login aqui
+                          // Quando clicar em Entrar -> vai direto pra HomePage
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromARGB(255, 105, 90, 47),

@@ -75,77 +75,86 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                       ),
                       SizedBox(height: 25),
 
+                      // Dropdown
                       DropdownButtonFormField<String>(
-  value: _selectedOption,
-  dropdownColor: Colors.brown[700], // fundo do menu suspenso
-  iconEnabledColor: Colors.white,  // cor da setinha
-  style: GoogleFonts.quicksand(
-    color: Colors.white, // cor do texto selecionado
-    fontSize: 16,
-  ),
-  items: [
-    DropdownMenuItem(
-      value: "email",
-      child: Text(
-        "Receber por E-mail",
-        style: GoogleFonts.quicksand(color: Colors.white),
-      ),
-    ),
-    DropdownMenuItem(
-      value: "sms",
-      child: Text(
-        "Receber por SMS",
-        style: GoogleFonts.quicksand(color: Colors.white),
-      ),
-    ),
-  ],
-  decoration: InputDecoration(
-    labelText: "Escolha uma opção",
-    labelStyle: GoogleFonts.quicksand(color: Colors.white),
-    filled: true,
-    fillColor: Colors.white.withOpacity(0.2),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-    ),
-  ),
-  onChanged: (value) {
-    setState(() {
-      _selectedOption = value;
-      _controller.clear();
-    });
-  },
-),
+                        value: _selectedOption,
+                        dropdownColor: Colors.brown[700],
+                        iconEnabledColor: Colors.white,
+                        style: GoogleFonts.quicksand(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                        items: [
+                          DropdownMenuItem(
+                            value: "email",
+                            child: Text(
+                              "Receber por E-mail",
+                              style: GoogleFonts.quicksand(color: Colors.white),
+                            ),
+                          ),
+                          DropdownMenuItem(
+                            value: "sms",
+                            child: Text(
+                              "Receber por SMS",
+                              style: GoogleFonts.quicksand(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                        decoration: InputDecoration(
+                          labelText: "Escolha uma opção",
+                          labelStyle: GoogleFonts.quicksand(color: Colors.white),
+                          filled: true,
+                          fillColor: Colors.white.withOpacity(0.2),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedOption = value;
+                            _controller.clear();
+                          });
+                        },
+                      ),
 
                       SizedBox(height: 20),
 
                       if (_selectedOption != null) ...[
                         TextField(
-  controller: _controller,
-  style: GoogleFonts.quicksand(
-    color: Colors.white, // cor do texto digitado
-  ),
-  decoration: InputDecoration(
-    prefixIcon: Icon(
-      _selectedOption == "email" ? Icons.email : Icons.phone,
-      color: Colors.white, // ícone branco também
-    ),
-    labelText: _selectedOption == "email"
-        ? "Digite seu E-mail"
-        : "Digite seu Telefone",
-    labelStyle: GoogleFonts.quicksand(color: Colors.white),
-    hintStyle: GoogleFonts.quicksand(color: Colors.white70),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.white70),
-      borderRadius: BorderRadius.circular(12),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.white),
-      borderRadius: BorderRadius.circular(12),
-    ),
-  ),
-),
+                          controller: _controller,
+                          keyboardType: _selectedOption == "sms"
+                              ? TextInputType.phone
+                              : TextInputType.emailAddress,
+                          inputFormatters:
+                              _selectedOption == "sms" ? [telefoneMask] : [],
+                          style: GoogleFonts.quicksand(
+                            color: Colors.white, // cor do texto digitado
+                          ),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              _selectedOption == "email"
+                                  ? Icons.email
+                                  : Icons.phone,
+                              color: const Color.fromARGB(255, 90, 70, 40),
+                            ),
+                            labelText: _selectedOption == "email"
+                                ? "Digite seu E-mail"
+                                : "Digite seu Telefone",
+                            labelStyle: GoogleFonts.quicksand(color: Colors.white),
+                            hintStyle: GoogleFonts.quicksand(color: Colors.white70),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white70),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
 
                         SizedBox(height: 20),
+
                         ElevatedButton(
                           onPressed: () {
                             Navigator.push(
@@ -159,7 +168,8 @@ class _EsqueciSenhaPageState extends State<EsqueciSenhaPage> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 105, 90, 47),
+                            backgroundColor:
+                                const Color.fromARGB(255, 105, 90, 47),
                             foregroundColor: Colors.white,
                             minimumSize: Size(double.infinity, 50),
                             shape: RoundedRectangleBorder(

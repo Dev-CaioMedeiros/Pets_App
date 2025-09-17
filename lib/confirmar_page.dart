@@ -77,13 +77,16 @@ class ConfirmarPage extends StatelessWidget {
                       ),
                       SizedBox(height: 20),
                       TextField(
+                        style: GoogleFonts.quicksand(
+                          color: Colors.white, // texto digitado branco
+                        ),
                         controller: _codeController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.password, color: const Color.fromARGB(255, 90, 70, 40)),
                           labelText: "Digite o código",
                           labelStyle: GoogleFonts.quicksand(
-                            color: const Color.fromARGB(255, 90, 70, 40),
+                            color: const Color.fromARGB(255, 255, 255, 255),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
