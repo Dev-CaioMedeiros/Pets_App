@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+// importa as telas
+import 'meus_pets_page.dart';
+import 'ultimos_passeios_page.dart';
+import 'consultas_page.dart';
+import 'pet_shop_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,29 +14,56 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // cores reaproveitadas
-    const bgBrown = Color(0xFF7A5E3E);
     const brandBrown = Color(0xFF5F432B);
     const accentBeige = Color(0xFFF7E9C7);
 
     final items = [
-      _MenuItem(icon: Icons.pets, label: 'Meus Pets', onTap: () {}),
-      _MenuItem(icon: Icons.directions_walk, label: 'Últimos passeios', onTap: () {}),
-      _MenuItem(icon: Icons.medical_services, label: 'Consultas', onTap: () {}),
-      _MenuItem(icon: Icons.storefront, label: 'Pet Shop', onTap: () {}),
+      _MenuItem(
+        icon: Icons.pets,
+        label: 'Meus Pets',
+        onTap: (context) => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => MeusPetsPage()),
+        ),
+      ),
+      _MenuItem(
+        icon: FontAwesomeIcons.dog,
+        label: 'Últimos passeios',
+        onTap: (context) => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => UltimosPasseiosPage()),
+        ),
+      ),
+      _MenuItem(
+        icon: Icons.medical_services,
+        label: 'Consultas',
+        onTap: (context) => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ConsultasPage()),
+        ),
+      ),
+      _MenuItem(
+        icon: Icons.storefront,
+        label: 'Pet Shop',
+        onTap: (context) => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => PetShopPage()),
+        ),
+      ),
     ];
 
     return Scaffold(
-  body: Container(
-    decoration: BoxDecoration(
-          gradient: LinearGradient(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
             colors: [
-              const Color.fromARGB(255, 121, 103, 79),
-              const Color.fromARGB(255, 121, 103, 79),
+              Color.fromARGB(255, 121, 103, 79),
+              Color.fromARGB(255, 121, 103, 79),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
-          image: DecorationImage(
+          image: const DecorationImage(
             image: AssetImage("assets/paws_pattern.png"),
             repeat: ImageRepeat.repeat,
             fit: BoxFit.none,
@@ -37,8 +71,8 @@ class HomePage extends StatelessWidget {
             opacity: 0.30,
           ),
         ),
-    child: SafeArea(
-      child: Column(
+        child: SafeArea(
+          child: Column(
             children: [
               // Topo com logo + avatar
               Padding(
@@ -51,7 +85,7 @@ class HomePage extends StatelessWidget {
                             fontSize: 32,
                             fontWeight: FontWeight.w800)),
                     const Spacer(),
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 24,
                       backgroundColor: Colors.white,
                       child: Icon(Icons.person, color: brandBrown),
@@ -99,7 +133,7 @@ class HomePage extends StatelessWidget {
                           .map((i) => _ActionCard(
                                 icon: i.icon,
                                 label: i.label,
-                                onTap: i.onTap,
+                                onTap: () => i.onTap(context),
                               ))
                           .toList(),
                     ),
@@ -126,7 +160,7 @@ class HomePage extends StatelessWidget {
 class _MenuItem {
   final IconData icon;
   final String label;
-  final VoidCallback onTap;
+  final void Function(BuildContext context) onTap;
   _MenuItem({required this.icon, required this.label, required this.onTap});
 }
 
@@ -136,7 +170,7 @@ class _ActionCard extends StatefulWidget {
   final VoidCallback onTap;
 
   const _ActionCard(
-      {required this.icon, required this.label, required this.onTap});
+      {required this.icon, required this.label, required this.onTap, super.key});
 
   @override
   State<_ActionCard> createState() => _ActionCardState();
